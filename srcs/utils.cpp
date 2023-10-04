@@ -1,4 +1,5 @@
 #include "../incs/sandbox.hpp"
+#include "../incs/shaderClass.hpp"
 
 int    initLibraries()
 {

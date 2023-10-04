@@ -9,7 +9,7 @@ class ASolid : public AElement
 
     protected:
         bool    freeFalling;
-        virtual void moveElement() = 0;
+        virtual void moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
 
     public:
         ASolid(int type);

@@ -1,6 +1,6 @@
 #include "../incs/Element.hpp"
 
-AElement::AElement(int type, int state) : particule_type(type), particule_state(state), x_velocity(0.0f), y_velocity(0.0f)
+AElement::AElement(int state, int type) : x_velocity(0.0f), y_velocity(0.0f), particule_state(state), particule_type(type)
 {
     // free = true;
     // particule_type = AIR;
@@ -24,6 +24,11 @@ AElement::~AElement()
 // {
 //     return (free);
 // }
+
+float*  AElement::get_color()
+{
+    return (color);
+}
 
 int     AElement::get_particule_type()
 {

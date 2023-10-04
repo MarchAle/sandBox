@@ -29,6 +29,9 @@ LST_SRCS	:=	main.cpp		\
 				EBO.cpp			\
 				particule.cpp	\
 				Element.cpp		\
+				Solid.cpp		\
+				Sand.cpp		\
+				Void.cpp		\
 				callback.cpp
 		
 LST_INCS	:=	shaderClass.hpp \
@@ -37,6 +40,9 @@ LST_INCS	:=	shaderClass.hpp \
 				EBO.hpp			\
 				particule.hpp	\
 				Element.hpp		\
+				Solid.hpp		\
+				Sand.hpp		\
+				Void.hpp		\
 				sandbox.hpp
 			
 LST_OBJS := $(LST_SRCS:.cpp=.o)

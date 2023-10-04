@@ -11,7 +11,7 @@ class Sand : public ASolid
     public:
         Sand();
         ~Sand();
-        void    moveElement(Map &map, int x, int y);
+        void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
 };
 
 #endif

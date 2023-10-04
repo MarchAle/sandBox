@@ -1,4 +1,5 @@
 #include "../incs/sandbox.hpp"
+#include "../incs/particule.hpp"
 
 void render(float &glParticuleWidth, float &glParticuleHeight)
 {
@@ -24,6 +25,10 @@ void render(float &glParticuleWidth, float &glParticuleHeight)
         };
         indices.insert(indices.end(), squareIndices, squareIndices + 6);
     }
+    std::cout << "particules :\t" << particules.size() << std::endl;
+    std::cout << "allVertices :\t" << allVertices.size() << std::endl;
+    std::cout << "indices :\t" << indices.size() << std::endl;
+    std::cout << "colors :\t" << colors.size() << std::endl << std::endl;
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, allVertices.size() * sizeof(GLfloat), allVertices.data(), GL_STATIC_DRAW);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);

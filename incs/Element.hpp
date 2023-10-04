@@ -3,11 +3,6 @@
 
 #include "../incs/sandbox.hpp"
 
-# define AIR 0
-# define SAND 1
-
-# define SOLID 0
-# define LIQUID 1
 
 class AElement
 {
@@ -16,31 +11,32 @@ class AElement
         float   x_velocity;
         float   y_velocity;
         // bool    free;
-        int     particule_type;
         int     particule_state;
+        int     particule_type;
         // float   x;
         // float   y;
-        // virtual void    moveElement() = 0;
 
     public:
-        AElement(int type, int state);
+        virtual void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
+        AElement(int state, int type);
         ~AElement();
         // void set_free_as(const bool status);
         // void set_particule_type(const int type);
         // bool is_free();
+        float* get_color();
         int  get_particule_type();
         int  get_particule_state();
         // float   getX();
         // float   getY();
 };
 
-template<typename T>
-void    swapElement(T &first, T &second)
-{
-    T temp = first;
-    first = second;
-    second = temp;
-}
+// template<typename T>
+// void    swapElement(T &first, T &second)
+// {
+//     T temp = first;
+//     first = second;
+//     second = temp;
+// }
 
 
 #endif
