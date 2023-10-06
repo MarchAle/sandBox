@@ -30,7 +30,7 @@ void    Sand::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > 
     {
         std::uniform_int_distribution<int> dist(-1, 1);
         int randomValue = dist(gen);
-        if ((*map[x + randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x + randomValue][y]).get_particule_state() == LIQUID)
+        if (isValidCoordonate(map, x + randomValue, y + 1) && (*map[x + randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x + randomValue][y]).get_particule_state() == LIQUID)
         {
             std::swap(map[x + randomValue][y + 1], map[x][y]);
             // swapElement(map[x + randomValue][y + 1], map[x][y]);
@@ -39,7 +39,7 @@ void    Sand::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > 
             // map[x][y].set_free_as(true);
             // map[x][y].set_particule_type(AIR);
         }
-        else if ((*map[x - randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x - randomValue][y]).get_particule_state() == LIQUID)
+        else if (isValidCoordonate(map, x - randomValue, y + 1) && (*map[x - randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x - randomValue][y]).get_particule_state() == LIQUID)
         {
             std::swap(map[x - randomValue][y + 1], map[x][y]);
             // swapElement(map[x - randomValue][y + 1], map[x][y]);

@@ -20,6 +20,7 @@ DIR_OBJS	:= ./objs
 DIR_INCS	:= ./incs
 
 LST_SRCS	:=	main.cpp		\
+				validators.cpp	\
 				utils.cpp		\
 				partOnClick.cpp	\
 				render.cpp		\

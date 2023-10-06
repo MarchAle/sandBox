@@ -43,12 +43,8 @@ void    buildParticulesVector(std::vector<std::vector<std::unique_ptr<AElement> 
                 //     b = 0;
                 // }
                 // if ((*map[i][j]).get_particule_type() == 1)
-                for (int i = 0; i < 4; i++)
-                {
-                    std::cout << "color added ! " << (*map[i][j]).get_color()[0] << " " << (*map[i][j]).get_color()[1] << " " << (*map[i][j]).get_color()[2] << std::endl;
-
+                for (int k = 0; k < 4; k++)
                     colors.insert(colors.end(), {(*map[i][j]).get_color()[0], (*map[i][j]).get_color()[1], (*map[i][j]).get_color()[2]});
-                }
                     // colors.insert(colors.end(), {r, g, b});
                     // colors.insert(colors.end(), colorsVector[map[i][j].get_particule_type()].begin(), colorsVector[map[i][j].get_particule_type()].end());
             }

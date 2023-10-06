@@ -24,7 +24,7 @@ class AElement;
 
 #define WIN_WIDTH 1000
 #define WIN_HEIGHT 800
-#define PARTICULE_SIZE 50
+#define PARTICULE_SIZE 5
 #define SPREAD_SIZE 5
 
 #define VOID -1
@@ -56,6 +56,8 @@ extern std::mt19937 gen; // Create a Mersenne Twister pseudo-random generator
 int     initLibraries();
 void    setUpOpenGl();
 void    cleanUp();
+
+bool    isValidCoordonate(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
 
 void    processClick(std::vector<std::vector<std::unique_ptr<AElement> > > &map);
 

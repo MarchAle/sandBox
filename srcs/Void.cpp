@@ -2,9 +2,9 @@
 
 Void::Void() : AElement(LIQUID, VOID)
 {
-    this->color[0] = 0.1f;
-    this->color[1] = 0.9f;
-    this->color[2] = 0.3f;
+    this->color[0] = 0.0f;
+    this->color[1] = 0.0f;
+    this->color[2] = 0.0f;
 }
 
 Void::~Void()
