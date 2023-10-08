@@ -2,13 +2,15 @@
 
 Void::Void() : AElement(LIQUID, VOID)
 {
-    this->color[0] = 0.0f;
-    this->color[1] = 0.0f;
-    this->color[2] = 0.0f;
+    // this->color[0] = 0.0f;
+    // this->color[1] = 0.0f;
+    // this->color[2] = 0.0f;
+    color = generateColor(0, 0, 0, 0, 0, 0);
 }
 
 Void::~Void()
 {
+    delete[] color;
 }
 
 void  Void::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
@@ -17,3 +19,18 @@ void  Void::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &m
     (void)x;
     (void)y;
 }
+
+float* Void::generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue)
+{
+    (void)minRed;
+    (void)maxRed;
+    (void)minGreen;
+    (void)maxGreen;
+    (void)minBlue;
+    (void)maxBlue;
+
+    float *colorArray = new float[3]{0.1, 0.1, 0.1};
+
+    return (colorArray);
+}
+

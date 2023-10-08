@@ -2,6 +2,7 @@
 
 AElement::AElement(int state, int type) : x_velocity(0.0f), y_velocity(0.0f), particule_state(state), particule_type(type)
 {
+    falling = true;
     // free = true;
     // particule_type = AIR;
 }
@@ -49,3 +50,14 @@ int     AElement::get_particule_state()
 // {
 //     return (y);
 // }
+
+
+bool    AElement::isFalling()
+{
+    return (falling);
+}
+
+void    AElement::setFallingAs(bool value)
+{
+    falling = value;
+}

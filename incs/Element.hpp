@@ -7,14 +7,17 @@
 class AElement
 {
     protected:
-        float   color[3];
+        float   *color;
         float   x_velocity;
         float   y_velocity;
         // bool    free;
         int     particule_state;
         int     particule_type;
+
+        bool    falling;
         // float   x;
         // float   y;
+        virtual float*  generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue) = 0;
 
     public:
         virtual void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
@@ -26,6 +29,8 @@ class AElement
         float* get_color();
         int  get_particule_type();
         int  get_particule_state();
+        bool isFalling();
+        void setFallingAs(bool value);
         // float   getX();
         // float   getY();
 };

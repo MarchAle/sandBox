@@ -1,11 +1,18 @@
 #include "../incs/Solid.hpp"
 
 
-ASolid::ASolid(int type) : AElement(SOLID, type)
+ASolid::ASolid(int type, float granularFlow) : AElement(SOLID, type), granularFlow(granularFlow)
 {
     // particule_state = SOLID;
 }
 
 ASolid::~ASolid()
 {
+}
+
+bool    ASolid::shouldFall()
+{
+    if (rand() / static_cast<float> (RAND_MAX) < granularFlow)
+        return (true);
+    return (false);
 }

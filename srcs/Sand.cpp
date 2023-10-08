@@ -1,52 +1,54 @@
 #include "../incs/Sand.hpp"
 
-Sand::Sand(/* args */) : ASolid(SAND)
+Sand::Sand() : ASolid(SAND, SAND_GRANULAR_FLOW)
 {
-    this->color[0] = 0.8f;
-    this->color[1] = 0.1f;
-    this->color[2] = 0.1f;
+    color = generateColor(185, 210, 181, 206, 49, 76);
 }
 
 Sand::~Sand()
 {
+    delete[] color;
 }
 
 void    Sand::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
 {
     if ((*map[x][y + 1]).get_particule_state() == LIQUID)
     {
-        // std::cout << "map[x][y] color[0] " << (*map[x][y]).get_color()[0] << std::endl;
-        // std::cout << "map[x][y + 1] color[0] " << (*map[x][y + 1]).get_color()[0] << std::endl;
+        (*map[x + 1][y]).setFallingAs(true);
+        (*map[x - 1][y]).setFallingAs(true);
         std::swap(map[x][y], map[x][y + 1]);
-        // std::cout << "map[x][y] color[0] " << (*map[x][y]).get_color()[0] << std::endl;
-        // std::cout << "map[x][y + 1] color[0] " << (*map[x][y + 1]).get_color()[0] << std::endl;
-        // swapElement(map[x][y], map[x][y + 1]);
-        // map[x][y + 1].set_free_as(false);
-        // map[x][y + 1].set_particule_type(map[x][y].get_particule_type());
-        // map[x][y].set_free_as(true);
-        // map[x][y].set_particule_type(AIR);
     }
-    else
+    else if (isFalling() == true) // && shouldFall() == true
     {
         std::uniform_int_distribution<int> dist(-1, 1);
         int randomValue = dist(gen);
         if (isValidCoordonate(map, x + randomValue, y + 1) && (*map[x + randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x + randomValue][y]).get_particule_state() == LIQUID)
         {
             std::swap(map[x + randomValue][y + 1], map[x][y]);
-            // swapElement(map[x + randomValue][y + 1], map[x][y]);
-            // map[x + randomValue][y + 1].set_free_as(false);
-            // map[x + randomValue][y + 1].set_particule_type(map[x][y].get_particule_type());
-            // map[x][y].set_free_as(true);
-            // map[x][y].set_particule_type(AIR);
+            // (*map[x + randomValue][y + 1]).setFallingAs(true);
         }
         else if (isValidCoordonate(map, x - randomValue, y + 1) && (*map[x - randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x - randomValue][y]).get_particule_state() == LIQUID)
         {
             std::swap(map[x - randomValue][y + 1], map[x][y]);
-            // swapElement(map[x - randomValue][y + 1], map[x][y]);
-            // map[x - randomValue][y + 1].set_free_as(false);
-            // map[x - randomValue][y + 1].set_particule_type(map[x][y].get_particule_type());
-            // map[x][y].set_free_as(true);
-            // map[x][y].set_particule_type(AIR);
+            // (*map[x - randomValue][y + 1]).setFallingAs(true);
         }
+        else
+            setFallingAs(false);
     }
+}
+
+float*    Sand::generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue)
+{
+    int redInterval = maxRed - minRed;
+    int redOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * redInterval;
+    float   redValue = static_cast<float> (static_cast<float> (minRed + redOffset) / 255);
+    int greenInterval = maxGreen - minGreen;
+    int greenOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * greenInterval;
+    float   greenValue = static_cast<float> (static_cast<float> (minGreen + greenOffset) / 255);
+    int blueInterval = maxBlue - minBlue;
+    int blueOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * blueInterval;
+    float   blueValue = static_cast<float> (static_cast<float> (minBlue + blueOffset) / 255);
+
+    float *colorArray = new float[3]{redValue, greenValue, blueValue};
+    return (colorArray);
 }

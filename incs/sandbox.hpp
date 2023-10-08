@@ -34,6 +34,8 @@ class AElement;
 #define SOLID 0
 #define LIQUID 1
 
+#define SAND_GRANULAR_FLOW 0.9
+
 // typedef std::vector<std::vector<std::unique_ptr<AElement> > > Map;
 
 extern int  squareSize;
