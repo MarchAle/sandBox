@@ -12,29 +12,61 @@ Sand::~Sand()
 
 void    Sand::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
 {
-    if ((*map[x][y + 1]).get_particule_state() == LIQUID)
+    if (isFalling() == true)
     {
-        (*map[x + 1][y]).setFallingAs(true);
-        (*map[x - 1][y]).setFallingAs(true);
-        std::swap(map[x][y], map[x][y + 1]);
-    }
-    else if (isFalling() == true) // && shouldFall() == true
-    {
-        std::uniform_int_distribution<int> dist(-1, 1);
-        int randomValue = dist(gen);
-        if (isValidCoordonate(map, x + randomValue, y + 1) && (*map[x + randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x + randomValue][y]).get_particule_state() == LIQUID)
+        int i = 0;
+
+        while (i < abs(y_velocity) && isValidCoordonate(map, x, y + i + 1)) 
         {
-            std::swap(map[x + randomValue][y + 1], map[x][y]);
-            // (*map[x + randomValue][y + 1]).setFallingAs(true);
+            if ((*map[x][y + i + 1]).get_particule_state() == LIQUID)
+            {
+                std::swap(map[x][y + i], map[x][y + i + 1]);
+                if (isValidCoordonate(map, x - 1, y + i) && (*map[x - 1][y + i]).get_particule_state() == SOLID)
+                {
+                    (*map[x - 1][y + i]).setFallingAs(true);
+                    (*map[x - 1][y + i]).y_velocity = 1;
+                }
+                if (isValidCoordonate(map, x + 1, y + i) && (*map[x + 1][y + i]).get_particule_state() == SOLID)
+                {
+                    (*map[x + 1][y + i]).setFallingAs(true);
+                    (*map[x + 1][y + i]).y_velocity = 1;
+                }
+            }
+            else
+            {
+                if (shouldFall() == true)
+                {
+                    std::uniform_int_distribution<int> dist(-1, 1);
+                    int randomValue = dist(gen);
+                    if (isValidCoordonate(map, x + randomValue, y + i + 1) && (*map[x + randomValue][y + i + 1]).get_particule_state() == LIQUID && (*map[x + randomValue][y + i]).get_particule_state() == LIQUID)
+                    {
+                        std::swap(map[x + randomValue][y + i + 1], map[x][y + i]);
+                        // if (isValidCoordonate(map, x + randomValue, y + i + 2) && (*map[x + randomValue][y + i + 1]).get_particule_state() == SOLID)
+                        //     setFallingAs(false);
+                    }
+                    else if (isValidCoordonate(map, x - randomValue, y + i + 1) && (*map[x - randomValue][y + i + 1]).get_particule_state() == LIQUID && (*map[x - randomValue][y + i]).get_particule_state() == LIQUID)
+                    {
+                        std::swap(map[x - randomValue][y + i + 1], map[x][y + i]);
+                        // if (isValidCoordonate(map, x - randomValue, y + i + 2) && (*map[x - randomValue][y + i + 1]).get_particule_state() == SOLID)
+                        //     setFallingAs(false);
+                    }
+                    // else
+                    // {
+                    //     setFallingAs(false);
+                    //     y_velocity = 1;
+                    // }
+                }
+                else
+                {
+                    setFallingAs(false);
+                    y_velocity = 1;
+                }
+                break;
+            }
+            i++;
         }
-        else if (isValidCoordonate(map, x - randomValue, y + 1) && (*map[x - randomValue][y + 1]).get_particule_state() == LIQUID && (*map[x - randomValue][y]).get_particule_state() == LIQUID)
-        {
-            std::swap(map[x - randomValue][y + 1], map[x][y]);
-            // (*map[x - randomValue][y + 1]).setFallingAs(true);
-        }
-        else
-            setFallingAs(false);
     }
+
 }
 
 float*    Sand::generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue)

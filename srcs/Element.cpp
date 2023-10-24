@@ -1,6 +1,6 @@
 #include "../incs/Element.hpp"
 
-AElement::AElement(int state, int type) : x_velocity(0.0f), y_velocity(0.0f), particule_state(state), particule_type(type)
+AElement::AElement(int state, int type) : x_velocity(1.0f), y_velocity(1.0f), particule_state(state), particule_type(type)
 {
     falling = true;
     // free = true;

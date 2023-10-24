@@ -6,10 +6,12 @@
 
 class AElement
 {
-    protected:
-        float   *color;
+    public:
         float   x_velocity;
         float   y_velocity;
+
+    protected:
+        float   *color;
         // bool    free;
         int     particule_state;
         int     particule_type;
