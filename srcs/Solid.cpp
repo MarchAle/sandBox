@@ -1,7 +1,7 @@
 #include "../incs/Solid.hpp"
 
 
-ASolid::ASolid(int type, float granularFlow) : AElement(SOLID, type), granularFlow(granularFlow)
+ASolid::ASolid(int type, float granularFlow) : AElement(SOLID, type, 1), granularFlow(granularFlow)
 {
     // particule_state = SOLID;
 }

@@ -69,18 +69,18 @@ void    Sand::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > 
 
 }
 
-float*    Sand::generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue)
-{
-    int redInterval = maxRed - minRed;
-    int redOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * redInterval;
-    float   redValue = static_cast<float> (static_cast<float> (minRed + redOffset) / 255);
-    int greenInterval = maxGreen - minGreen;
-    int greenOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * greenInterval;
-    float   greenValue = static_cast<float> (static_cast<float> (minGreen + greenOffset) / 255);
-    int blueInterval = maxBlue - minBlue;
-    int blueOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * blueInterval;
-    float   blueValue = static_cast<float> (static_cast<float> (minBlue + blueOffset) / 255);
+// float*    Sand::generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue)
+// {
+//     int redInterval = maxRed - minRed;
+//     int redOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * redInterval;
+//     float   redValue = static_cast<float> (static_cast<float> (minRed + redOffset) / 255);
+//     int greenInterval = maxGreen - minGreen;
+//     int greenOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * greenInterval;
+//     float   greenValue = static_cast<float> (static_cast<float> (minGreen + greenOffset) / 255);
+//     int blueInterval = maxBlue - minBlue;
+//     int blueOffset = static_cast<float> (rand() / static_cast<float> (RAND_MAX)) * blueInterval;
+//     float   blueValue = static_cast<float> (static_cast<float> (minBlue + blueOffset) / 255);
 
-    float *colorArray = new float[3]{redValue, greenValue, blueValue};
-    return (colorArray);
-}
+//     float *colorArray = new float[3]{redValue, greenValue, blueValue};
+//     return (colorArray);
+// }

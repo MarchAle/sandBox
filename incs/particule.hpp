@@ -15,6 +15,4 @@ class Particule
         float    getY();
 };
 
-
-
 #endif

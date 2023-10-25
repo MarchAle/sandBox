@@ -26,8 +26,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             case 81:
                 currentParticuleType = AIR;
                 break;
+            case 82:
+                currentParticuleType = STONE;
+                break;
             case 83:
                 currentParticuleType = SAND;
+                break;
+            case 90:
+                currentParticuleType = WATER;
                 break;
             
             default:

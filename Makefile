@@ -31,8 +31,12 @@ LST_SRCS	:=	main.cpp		\
 				particule.cpp	\
 				Element.cpp		\
 				Solid.cpp		\
+				Liquid.cpp		\
+				Water.cpp		\
 				Sand.cpp		\
+				Stone.cpp		\
 				Void.cpp		\
+				Air.cpp		\
 				callback.cpp
 		
 LST_INCS	:=	shaderClass.hpp \
@@ -42,7 +46,11 @@ LST_INCS	:=	shaderClass.hpp \
 				particule.hpp	\
 				Element.hpp		\
 				Solid.hpp		\
+				Liquid.hpp		\
+				Water.hpp		\
 				Sand.hpp		\
+				Stone.hpp		\
+				Air.hpp		\
 				Void.hpp		\
 				sandbox.hpp
 			

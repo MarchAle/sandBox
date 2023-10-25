@@ -1,6 +1,6 @@
 #include "../incs/Void.hpp"
 
-Void::Void() : AElement(LIQUID, VOID)
+Void::Void() : AElement(LIQUID, VOID, 0)
 {
     // this->color[0] = 0.0f;
     // this->color[1] = 0.0f;

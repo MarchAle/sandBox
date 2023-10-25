@@ -1,4 +1,5 @@
 #include "../incs/sandbox.hpp"
+#include "../incs/Air.hpp"
 #include "../incs/Void.hpp"
 #include "../incs/Sand.hpp"
 #include "../incs/particule.hpp"
@@ -27,7 +28,7 @@ void    buildParticulesVector(std::vector<std::vector<std::unique_ptr<AElement> 
     {
         for (size_t j = 0; j < map[0].size(); j++)
         {
-            if ((*map[i][j]).get_particule_type() == 1)
+            if ((*map[i][j]).get_particule_type() != AIR)
             {
                 particules.emplace_back((((float)i * squareSize) / (WIN_WIDTH / 2) - 1.0), -((float)j * squareSize / (WIN_HEIGHT / 2) - 1.0));
                 // if ((*map[i][j]).isFalling() == true)
@@ -84,7 +85,7 @@ int main()
     for (size_t i = 0; i < map.size(); i++)
     {
         for (int j = 0; j < WIN_HEIGHT / squareSize + 1; j++)
-            map[i].push_back(std::make_unique<Void>());
+            map[i].push_back(std::make_unique<Air>());
     }
 
     float glParticuleWidth = (float)squareSize / WIN_WIDTH;

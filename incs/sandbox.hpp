@@ -30,6 +30,11 @@ class AElement;
 #define VOID -1
 #define AIR 0
 #define SAND 1
+#define WATER 2
+#define STONE 3
+
+#define AIR_DENSITY 0.1
+#define WATER_DENSITY 0.9
 
 #define SOLID 0
 #define LIQUID 1
