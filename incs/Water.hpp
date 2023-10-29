@@ -12,6 +12,9 @@ class Water : public ALiquid
         ~Water();
         void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
 
+        bool    isWet();
+        void    setWetAs(bool value);
+
 };
 
 

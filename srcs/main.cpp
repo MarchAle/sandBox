@@ -39,7 +39,12 @@ void    buildParticulesVector(std::vector<std::vector<std::unique_ptr<AElement> 
                 // else
                 // {
                     for (int k = 0; k < 4; k++)
-                        colors.insert(colors.end(), {(*map[i][j]).get_color()[0], (*map[i][j]).get_color()[1], (*map[i][j]).get_color()[2]});
+                    {
+                        if ((*map[i][j]).get_particule_state() == SOLID && (*map[i][j]).isWet() == true)
+                            colors.insert(colors.end(), {(*map[i][j]).get_color()[0] * 0.7f, (*map[i][j]).get_color()[1] * 0.7f, (*map[i][j]).get_color()[2] * 0.7f});
+                        else
+                            colors.insert(colors.end(), {(*map[i][j]).get_color()[0], (*map[i][j]).get_color()[1], (*map[i][j]).get_color()[2]});
+                    }
                 // }
             }
         }
@@ -53,6 +58,7 @@ void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
         for (int x = 0; x < (int)map.size() - 1; x++)
         {
             (*map[x][y]).moveElement(map, x, y);
+            (*map[x][y]).moveHumidity(map, x, y);
             ///// correctif pour les cas ou des particules restaient bloquées en not falling au dessus d'un vide
             if (isValidCoordonate(map, x, y + 1) && (*map[x][y]).isFalling() == false && (*map[x][y + 1]).get_particule_state() == LIQUID)
             {

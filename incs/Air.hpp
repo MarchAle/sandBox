@@ -11,6 +11,9 @@ class Air : public ALiquid
         Air(/* args */);
         ~Air();
         void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+
+        bool    isWet();
+        void    setWetAs(bool value);
 };
 
 

@@ -11,6 +11,8 @@ class ALiquid : public AElement
         ALiquid(int type, float density);
         ~ALiquid();
         // float   get_density();
+        void    moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+
 };
 
 

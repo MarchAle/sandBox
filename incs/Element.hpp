@@ -25,7 +25,7 @@ class AElement
     public:
         virtual void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
         AElement(int state, int type, float density);
-        ~AElement();
+        virtual ~AElement();
         // void set_free_as(const bool status);
         // void set_particule_type(const int type);
         // bool is_free();
@@ -37,6 +37,11 @@ class AElement
         float   get_density();
         // float   getX();
         // float   getY();
+
+        virtual bool isWet() = 0;
+        virtual void setWetAs(bool value) = 0;
+        virtual void moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
+         
 };
 
 // template<typename T>
