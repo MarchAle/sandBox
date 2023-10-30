@@ -15,13 +15,15 @@ void    mouse_button_callback(GLFWwindow* window, int button, int action, int mo
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    // std::cout << "key press : " << key << std::endl;
     if (action == GLFW_PRESS)
     {
         switch (key)
         {
             case 68:
                 deleteMode = true;
+                break;
+            case 78:
+                currentParticuleType = SNOW;
                 break;
             case 81:
                 currentParticuleType = AIR;

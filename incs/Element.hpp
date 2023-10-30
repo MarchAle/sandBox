@@ -21,6 +21,8 @@ class AElement
         // float   x;
         // float   y;
         float*  generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue);
+        float*  generateColor(int minRGB, int maxRGB);
+
 
     public:
         virtual void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;

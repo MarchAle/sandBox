@@ -3,6 +3,7 @@
 #include "../incs/Void.hpp"
 #include "../incs/Air.hpp"
 #include "../incs/Sand.hpp"
+#include "../incs/Snow.hpp"
 #include "../incs/Stone.hpp"
 #include "../incs/Water.hpp"
 
@@ -32,6 +33,9 @@ void    addParticules(std::vector<std::vector<std::unique_ptr<AElement> > > &map
                 {
                 case SAND:
                     map[xpos + i][ypos + j] = std::make_unique<Sand>();
+                    break;
+                case SNOW:
+                    map[xpos + i][ypos + j] = std::make_unique<Snow>();
                     break;
                 case STONE:
                     map[xpos + i][ypos + j] = std::make_unique<Stone>();

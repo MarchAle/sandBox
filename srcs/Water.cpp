@@ -16,7 +16,7 @@ void    Water::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > >
     int i = 0;
     while (i < abs(y_velocity) && isValidCoordonate(map, x, y + i + 1)) 
         {
-            if ((*map[x][y + i + 1]).get_particule_state() == LIQUID && density > (*map[x][y + i + 1]).get_density())
+            if (((*map[x][y + i + 1]).get_particule_state() == LIQUID && density > (*map[x][y + i + 1]).get_density()) || (*map[x][y + i + 1]).get_particule_type() == SNOW)
             {
                 std::swap(map[x][y + i], map[x][y + i + 1]);
                 if (isValidCoordonate(map, x - 1, y + i) && (*map[x - 1][y + i]).get_particule_state() == SOLID)
@@ -31,7 +31,7 @@ void    Water::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > >
                 }
             }
             // wet the particule underneath
-            else if (rand() / static_cast<float> (RAND_MAX) < 0.02 && (*map[x][y + i + 1]).get_particule_type() == SAND && (*map[x][y + i + 1]).isWet() == false)
+            else if (rand() / static_cast<float> (RAND_MAX) < 0.02 && ((*map[x][y + i + 1]).get_particule_type() == SAND || (*map[x][y + i + 1]).get_particule_type() == SNOW) && (*map[x][y + i + 1]).isWet() == false)
             {
                 (*map[x][y + i + 1]).setWetAs(true);
                 map[x][y + i] = std::make_unique<Air>();
@@ -48,7 +48,7 @@ void    Water::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > >
                     {
                         std::swap(map[x + (j * randomValue)][y + i], map[x][y + i]);
                     }
-                    else if (isValidCoordonate(map, x + (j * randomValue), y + i) && (*map[x + (j * randomValue)][y + i]).get_particule_type() == SAND)
+                    else if (isValidCoordonate(map, x + (j * randomValue), y + i) && ((*map[x + (j * randomValue)][y + i]).get_particule_type() == SAND || (*map[x + (j * randomValue)][y + i]).get_particule_type() == SNOW))
                     {
                         // wet particule on side
                         if (rand() / static_cast<float> (RAND_MAX) < 0.5 && (*map[x + (j * randomValue)][y + i]).isWet() == false)

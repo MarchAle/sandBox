@@ -11,7 +11,7 @@ class Stone : public ASolid
         Stone();
         ~Stone();
         void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
-        float*  generateColor(int minRGB, int maxRGB);
+        // float*  generateColor(int minRGB, int maxRGB);
 
 };
 

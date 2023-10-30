@@ -32,6 +32,7 @@ class AElement;
 #define SAND 1
 #define WATER 2
 #define STONE 3
+#define SNOW 4
 
 #define AIR_DENSITY 0.1
 #define WATER_DENSITY 0.9
@@ -40,6 +41,7 @@ class AElement;
 #define LIQUID 1
 
 #define SAND_GRANULAR_FLOW 0.85
+#define SNOW_GRANULAR_FLOW 0.65
 
 #define GRAVITY 1.08
 

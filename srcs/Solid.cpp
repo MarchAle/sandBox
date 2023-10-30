@@ -34,7 +34,7 @@ void    ASolid::moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> >
         return ;
     if (rand() / static_cast<float> (RAND_MAX) < 0.3)
     {
-        if (isValidCoordonate(map, x, y + 1) && (*map[x][y + 1]).get_particule_type() == SAND && (*map[x][y + 1]).isWet() == false)
+        if (isValidCoordonate(map, x, y + 1) && ((*map[x][y + 1]).get_particule_type() == SAND || (*map[x][y + 1]).get_particule_type() == SNOW) && (*map[x][y + 1]).isWet() == false)
         {
             (*map[x][y + 1]).setWetAs(true);
             setWetAs(false);
@@ -45,7 +45,7 @@ void    ASolid::moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> >
             int randomValue = dist(gen);
             if (isValidCoordonate(map, x + randomValue, y))
             {
-                if ((*map[x + randomValue][y]).get_particule_type() == SAND && (*map[x + randomValue][y]).isWet() == false)
+                if (((*map[x + randomValue][y]).get_particule_type() == SAND || (*map[x + randomValue][y]).get_particule_type() == SNOW) && (*map[x + randomValue][y]).isWet() == false)
                 {
                     (*map[x + randomValue][y]).setWetAs(true);
                     setWetAs(false);

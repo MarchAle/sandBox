@@ -36,7 +36,8 @@ LST_SRCS	:=	main.cpp		\
 				Sand.cpp		\
 				Stone.cpp		\
 				Void.cpp		\
-				Air.cpp		\
+				Air.cpp			\
+				Snow.cpp		\
 				callback.cpp
 		
 LST_INCS	:=	shaderClass.hpp \
@@ -50,7 +51,8 @@ LST_INCS	:=	shaderClass.hpp \
 				Water.hpp		\
 				Sand.hpp		\
 				Stone.hpp		\
-				Air.hpp		\
+				Air.hpp			\
+				Snow.hpp		\
 				Void.hpp		\
 				sandbox.hpp
 			
