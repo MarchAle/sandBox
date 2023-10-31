@@ -54,7 +54,7 @@ void    buildParticulesVector(std::vector<std::vector<std::unique_ptr<AElement> 
 
 void    meltSnow(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
 {
-    if ((*map[x][y]).isFalling() == false && rand() / static_cast<float> (RAND_MAX) < 0.2)
+    if ((*map[x][y]).isFalling() == false && rand() / static_cast<float> (RAND_MAX) < 0.1)
         (*map[x][y]).decreaseLifeTime();
     if ((*map[x][y]).getLifeTime() <= 0)
     {

@@ -1,7 +1,10 @@
 #include "../incs/Snow.hpp"
 
-Snow::Snow(/* args */) : ASolid(SNOW, SNOW_GRANULAR_FLOW, true), lifeTime(100), flyingTime(30), flying(true)
+Snow::Snow(/* args */) : ASolid(SNOW, SNOW_GRANULAR_FLOW, true), flyingTime(30), flying(true)
 {
+    std::uniform_int_distribution<int> dist(100, 200);
+    int randomValue = dist(gen);
+    lifeTime = randomValue;
     color = generateColor(230, 255);
 }
 
