@@ -2,6 +2,7 @@
 #include "../incs/Air.hpp"
 #include "../incs/Void.hpp"
 #include "../incs/Sand.hpp"
+#include "../incs/Water.hpp"
 #include "../incs/particule.hpp"
 #include "../incs/shaderClass.hpp"
 
@@ -51,6 +52,27 @@ void    buildParticulesVector(std::vector<std::vector<std::unique_ptr<AElement> 
     }
 }
 
+void    meltSnow(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
+{
+    if ((*map[x][y]).isFalling() == false && rand() / static_cast<float> (RAND_MAX) < 0.2)
+        (*map[x][y]).decreaseLifeTime();
+    if ((*map[x][y]).getLifeTime() <= 0)
+    {
+        if ((*map[x][y]).isWet() == true)
+        {
+            if (isValidCoordonate(map, x, y + 1) && ((*map[x][y + 1]).get_particule_type() == SAND || (*map[x][y + 1]).get_particule_type() == SNOW) && (*map[x][y + 1]).isWet() == false)
+                (*map[x][y + 1]).setWetAs(true);
+            else if (isValidCoordonate(map, x + 1, y) && ((*map[x + 1][y]).get_particule_type() == SAND || (*map[x + 1][y]).get_particule_type() == SNOW) && (*map[x + 1][y]).isWet() == false)
+                (*map[x + 1][y]).setWetAs(true);
+            else if (isValidCoordonate(map, x - 1, y) && ((*map[x - 1][y]).get_particule_type() == SAND || (*map[x - 1][y]).get_particule_type() == SNOW) && (*map[x - 1][y]).isWet() == false)
+                (*map[x - 1][y]).setWetAs(true);
+            else if (isValidCoordonate(map, x, y - 1) && ((*map[x][y - 1]).get_particule_type() == SAND || (*map[x][y - 1]).get_particule_type() == SNOW) && (*map[x][y - 1]).isWet() == false)
+                (*map[x][y - 1]).setWetAs(true);
+        }
+        map[x][y] = std::make_unique<Water>();
+    }
+}
+
 void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
 {
     for (int y = (int)map[0].size() - 1; y >= 0; y--)
@@ -59,6 +81,8 @@ void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
         {
             (*map[x][y]).moveElement(map, x, y);
             (*map[x][y]).moveHumidity(map, x, y);
+            if ((*map[x][y]).get_particule_type() == SNOW)
+                meltSnow(map, x, y);
             ///// correctif pour les cas ou des particules restaient bloquées en not falling au dessus d'un vide
             if (isValidCoordonate(map, x, y + 1) && (*map[x][y]).isFalling() == false && (*map[x][y + 1]).get_particule_state() == LIQUID)
             {

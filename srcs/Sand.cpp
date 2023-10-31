@@ -1,6 +1,6 @@
 #include "../incs/Sand.hpp"
 
-Sand::Sand() : ASolid(SAND, SAND_GRANULAR_FLOW)
+Sand::Sand() : ASolid(SAND, SAND_GRANULAR_FLOW, true)
 {
     color = generateColor(185, 210, 181, 206, 49, 76);
 }

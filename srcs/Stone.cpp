@@ -1,6 +1,6 @@
 #include "../incs/Stone.hpp"
 
-Stone::Stone() : ASolid(STONE, 0)
+Stone::Stone() : ASolid(STONE, 0, false)
 {
     color = generateColor(110, 145);
 }

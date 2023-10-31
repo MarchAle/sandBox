@@ -1,7 +1,7 @@
 #include "../incs/Solid.hpp"
 #include "../incs/Water.hpp"
 
-ASolid::ASolid(int type, float granularFlow) : AElement(SOLID, type, 1), granularFlow(granularFlow)
+ASolid::ASolid(int type, float granularFlow, bool isFalling) : AElement(SOLID, type, 1, isFalling), granularFlow(granularFlow)
 {
     wet = false;
     // particule_state = SOLID;

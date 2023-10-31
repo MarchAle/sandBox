@@ -1,6 +1,6 @@
 #include "../incs/Liquid.hpp"
 
-ALiquid::ALiquid(int type, float density) : AElement(LIQUID, type, density)
+ALiquid::ALiquid(int type, float density, bool isFalling) : AElement(LIQUID, type, density, isFalling)
 {
 }
 

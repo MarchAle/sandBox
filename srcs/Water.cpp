@@ -1,7 +1,7 @@
 #include "../incs/Water.hpp"
 #include "../incs/Air.hpp"
 
-Water::Water() : ALiquid(WATER, WATER_DENSITY)
+Water::Water() : ALiquid(WATER, WATER_DENSITY, true)
 {
     color = generateColor(26, 55, 26, 55, 180, 200);
 }
@@ -16,7 +16,7 @@ void    Water::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > >
     int i = 0;
     while (i < abs(y_velocity) && isValidCoordonate(map, x, y + i + 1)) 
         {
-            if (((*map[x][y + i + 1]).get_particule_state() == LIQUID && density > (*map[x][y + i + 1]).get_density()) || (*map[x][y + i + 1]).get_particule_type() == SNOW)
+            if (((*map[x][y + i + 1]).get_particule_state() == LIQUID && density > (*map[x][y + i + 1]).get_density()) /*|| (*map[x][y + i + 1]).get_particule_type() == SNOW*/)
             {
                 std::swap(map[x][y + i], map[x][y + i + 1]);
                 if (isValidCoordonate(map, x - 1, y + i) && (*map[x - 1][y + i]).get_particule_state() == SOLID)

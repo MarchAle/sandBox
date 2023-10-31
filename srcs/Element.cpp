@@ -1,8 +1,8 @@
 #include "../incs/Element.hpp"
 
-AElement::AElement(int state, int type, float density) : x_velocity(1.0f), y_velocity(1.0f), particule_state(state), particule_type(type), density(density)
+AElement::AElement(int state, int type, float density, bool isFalling) : x_velocity(1.0f), y_velocity(1.0f), particule_state(state), particule_type(type), density(density)
 {
-    falling = true;
+    falling = isFalling;
     // free = true;
     // particule_type = AIR;
 }

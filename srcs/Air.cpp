@@ -1,6 +1,6 @@
 #include "../incs/Air.hpp"
 
-Air::Air(/* args */) : ALiquid(AIR, AIR_DENSITY)
+Air::Air(/* args */) : ALiquid(AIR, AIR_DENSITY, false)
 {
     color = generateColor(0, 0, 0, 0, 0, 0);
 

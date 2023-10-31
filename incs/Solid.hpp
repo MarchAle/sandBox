@@ -15,7 +15,7 @@ class ASolid : public AElement
 
 
     public:
-        ASolid(int type, float granularFlow);
+        ASolid(int type, float granularFlow, bool isFalling);
         ~ASolid();
         bool    shouldFall();
         bool    isWet();
