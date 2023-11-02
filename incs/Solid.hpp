@@ -15,12 +15,12 @@ class ASolid : public AElement
 
 
     public:
-        ASolid(int type, float granularFlow, bool isFalling);
+        ASolid(int type, float granularFlow, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~ASolid();
         bool    shouldFall();
         bool    isWet();
         void    setWetAs(bool value);
-        void    moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    moveHumidity(int x, int y);
 };
 
 

@@ -15,7 +15,7 @@ void    deleteParticule(std::vector<std::vector<std::unique_ptr<AElement> > > &m
         {
             if (isValidCoordonate(map, xpos + i, ypos + j))
             {
-                map[xpos + i][ypos + j] = std::make_unique<Air>();
+                map[xpos + i][ypos + j] = std::make_unique<Air>(&map);
             }
         }
     }
@@ -32,19 +32,19 @@ void    addParticules(std::vector<std::vector<std::unique_ptr<AElement> > > &map
                 switch (currentParticuleType)
                 {
                 case SAND:
-                    map[xpos + i][ypos + j] = std::make_unique<Sand>();
+                    map[xpos + i][ypos + j] = std::make_unique<Sand>(&map);
                     break;
                 case SNOW:
-                    map[xpos + i][ypos + j] = std::make_unique<Snow>();
+                    map[xpos + i][ypos + j] = std::make_unique<Snow>(&map);
                     break;
                 case STONE:
-                    map[xpos + i][ypos + j] = std::make_unique<Stone>();
+                    map[xpos + i][ypos + j] = std::make_unique<Stone>(&map);
                     break;
                 case AIR:
-                    map[xpos + i][ypos + j] = std::make_unique<Air>();
+                    map[xpos + i][ypos + j] = std::make_unique<Air>(&map);
                     break;
                 case WATER:
-                    map[xpos + i][ypos + j] = std::make_unique<Water>();
+                    map[xpos + i][ypos + j] = std::make_unique<Water>(&map);
                     break;
                 
                 default:

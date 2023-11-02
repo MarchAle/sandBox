@@ -8,9 +8,9 @@ class Void : public AElement
     private:
         /* data */
     public:
-        Void();
+        Void(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~Void();
-        void moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void moveElement(int x, int y);
         float*  generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue);
 
 };

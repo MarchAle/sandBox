@@ -1,6 +1,6 @@
 #include "../incs/Stone.hpp"
 
-Stone::Stone() : ASolid(STONE, 0, false)
+Stone::Stone(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr) : ASolid(STONE, 0, false, mapAddr)
 {
     color = generateColor(110, 145);
 }
@@ -10,7 +10,7 @@ Stone::~Stone()
     delete[] color;
 }
 
-void    Stone::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
+void    Stone::moveElement(int x, int y)
 {
     (void)map;
     (void)x;

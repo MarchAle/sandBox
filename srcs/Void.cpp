@@ -1,6 +1,6 @@
 #include "../incs/Void.hpp"
 
-Void::Void() : AElement(LIQUID, VOID, 0, false)
+Void::Void(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr) : AElement(LIQUID, VOID, 0, false, mapAddr)
 {
     // this->color[0] = 0.0f;
     // this->color[1] = 0.0f;
@@ -13,7 +13,7 @@ Void::~Void()
     delete[] color;
 }
 
-void  Void::moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
+void  Void::moveElement(int x, int y)
 {
     (void)map;
     (void)x;

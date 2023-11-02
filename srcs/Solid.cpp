@@ -1,7 +1,7 @@
 #include "../incs/Solid.hpp"
 #include "../incs/Water.hpp"
 
-ASolid::ASolid(int type, float granularFlow, bool isFalling) : AElement(SOLID, type, 1, isFalling), granularFlow(granularFlow)
+ASolid::ASolid(int type, float granularFlow, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr) : AElement(SOLID, type, 1, isFalling, mapAddr), granularFlow(granularFlow)
 {
     wet = false;
     // particule_state = SOLID;
@@ -28,44 +28,44 @@ void    ASolid::setWetAs(bool value)
     wet = value;
 }
 
-void    ASolid::moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
+void    ASolid::moveHumidity(int x, int y)
 {
     if (isFalling() == true || isWet() == false)
         return ;
     if (rand() / static_cast<float> (RAND_MAX) < 0.3)
     {
-        if (isValidCoordonate(map, x, y + 1) && ((*map[x][y + 1]).get_particule_type() == SAND || (*map[x][y + 1]).get_particule_type() == SNOW) && (*map[x][y + 1]).isWet() == false)
+        if (isValidCoordonate(*map, x, y + 1) && ((*map)[x][y + 1]->get_particule_type() == SAND || (*map)[x][y + 1]->get_particule_type() == SNOW) && (*map)[x][y + 1]->isWet() == false)
         {
-            (*map[x][y + 1]).setWetAs(true);
+            (*map)[x][y + 1]->setWetAs(true);
             setWetAs(false);
         }
         else
         {
             std::uniform_int_distribution<int> dist(-1, 1);
             int randomValue = dist(gen);
-            if (isValidCoordonate(map, x + randomValue, y))
+            if (isValidCoordonate(*map, x + randomValue, y))
             {
-                if (((*map[x + randomValue][y]).get_particule_type() == SAND || (*map[x + randomValue][y]).get_particule_type() == SNOW) && (*map[x + randomValue][y]).isWet() == false)
+                if (((*map)[x + randomValue][y]->get_particule_type() == SAND || (*map)[x + randomValue][y]->get_particule_type() == SNOW) && (*map)[x + randomValue][y]->isWet() == false)
                 {
-                    (*map[x + randomValue][y]).setWetAs(true);
+                    (*map)[x + randomValue][y]->setWetAs(true);
                     setWetAs(false);
                 }
-                else if ((*map[x + randomValue][y]).get_particule_type() == AIR)
+                else if ((*map)[x + randomValue][y]->get_particule_type() == AIR)
                 {
-                    map[x + randomValue][y] = std::make_unique<Water>();
+                    (*map)[x + randomValue][y] = std::make_unique<Water>(map);
                     setWetAs(false);
                 }
             }
-            else if (isValidCoordonate(map, x - randomValue, y))
+            else if (isValidCoordonate(*map, x - randomValue, y))
             {
-                if ((*map[x - randomValue][y]).get_particule_type() == SAND && (*map[x - randomValue][y]).isWet() == false)
+                if ((*map)[x - randomValue][y]->get_particule_type() == SAND && (*map)[x - randomValue][y]->isWet() == false)
                 {
-                    (*map[x - randomValue][y]).setWetAs(true);
+                    (*map)[x - randomValue][y]->setWetAs(true);
                     setWetAs(false);
                 }
-                else if ((*map[x - randomValue][y]).get_particule_type() == AIR)
+                else if ((*map)[x - randomValue][y]->get_particule_type() == AIR)
                 {
-                    map[x - randomValue][y] = std::make_unique<Water>();
+                    (*map)[x - randomValue][y] = std::make_unique<Water>(map);
                     setWetAs(false);
                 }
             }

@@ -8,9 +8,9 @@ class Air : public ALiquid
     private:
         /* data */
     public:
-        Air(/* args */);
+        Air(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~Air();
-        void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    moveElement(int x, int y);
 
         bool    isWet();
         void    setWetAs(bool value);

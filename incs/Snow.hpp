@@ -9,10 +9,13 @@ class Snow : public ASolid
         int     lifeTime;
         int     flyingTime;
         bool    flying;
+
     public:
-        Snow(/* args */);
+        Snow(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~Snow();
-        void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    flyingMovement(int x, int y);
+        void    fallingMovement(int x, int y);
+        void    moveElement(int x, int y);
         bool    isFlying() override;
         void    setFlyingAs(bool value);
         void    decreaseLifeTime() override;

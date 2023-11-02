@@ -8,10 +8,10 @@ class ALiquid : public AElement
     private:
         // float density;
     public:
-        ALiquid(int type, float density, bool isFalling);
+        ALiquid(int type, float density, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~ALiquid();
         // float   get_density();
-        void    moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    moveHumidity(int x, int y);
 
 };
 

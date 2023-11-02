@@ -6,10 +6,6 @@
 
 class AElement
 {
-    public:
-        float   x_velocity;
-        float   y_velocity;
-
     protected:
         float   *color;
         // bool    free;
@@ -25,8 +21,13 @@ class AElement
 
 
     public:
-        virtual void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
-        AElement(int state, int type, float density, bool isFalling);
+        float   x_velocity;
+        float   y_velocity;
+        std::vector<std::vector<std::unique_ptr<AElement> > > *map;
+
+        virtual void    moveElement(int x, int y) = 0;
+        void    activateNeighbours(int x, int y);
+        AElement(int state, int type, float density, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         virtual ~AElement();
         // void set_free_as(const bool status);
         // void set_particule_type(const int type);
@@ -42,7 +43,7 @@ class AElement
 
         virtual bool isWet() = 0;
         virtual void setWetAs(bool value) = 0;
-        virtual void moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y) = 0;
+        virtual void moveHumidity(int x, int y) = 0;
 
         virtual bool    isFlying(){return false;};
         virtual void    decreaseLifeTime(){};

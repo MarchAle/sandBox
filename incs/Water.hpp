@@ -8,9 +8,9 @@ class Water : public ALiquid
     private:
         /* data */
     public:
-        Water();
+        Water(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~Water();
-        void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    moveElement(int x, int y);
 
         bool    isWet();
         void    setWetAs(bool value);

@@ -1,8 +1,10 @@
 #include "../incs/Element.hpp"
 
-AElement::AElement(int state, int type, float density, bool isFalling) : x_velocity(1.0f), y_velocity(1.0f), particule_state(state), particule_type(type), density(density)
+AElement::AElement(int state, int type, float density, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr)
+    : particule_state(state), particule_type(type), density(density), x_velocity(1.0f), y_velocity(1.0f)
 {
     falling = isFalling;
+    map = mapAddr;
     // free = true;
     // particule_type = AIR;
 }
@@ -93,4 +95,18 @@ float*    AElement::generateColor(int minRGB, int maxRGB)
 
     float *colorArray = new float[3]{redValue, greenValue, blueValue};
     return (colorArray);
+}
+
+void    AElement::activateNeighbours(int x, int y)
+{
+    if (isValidCoordonate(*map, x - 1, y) && (*map)[x - 1][y]->get_particule_state() == SOLID && (*map)[x - 1][y]->isFalling() == false)
+    {
+        (*map)[x - 1][y]->setFallingAs(true);
+        (*map)[x - 1][y]->y_velocity = 1;
+    }
+    if (isValidCoordonate(*map, x + 1, y) && (*map)[x + 1][y]->get_particule_state() == SOLID && (*map)[x + 1][y]->isFalling() == false)
+    {
+        (*map)[x + 1][y]->setFallingAs(true);
+        (*map)[x + 1][y]->y_velocity = 1;
+    }
 }

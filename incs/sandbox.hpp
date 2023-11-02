@@ -41,7 +41,7 @@ class AElement;
 #define LIQUID 1
 
 #define SAND_GRANULAR_FLOW 0.85
-#define SNOW_GRANULAR_FLOW 0.65
+#define SNOW_GRANULAR_FLOW 0.75
 
 #define GRAVITY 1.08
 
@@ -52,6 +52,7 @@ extern int  spread;
 extern int  currentParticuleType;
 extern bool buttonPress;
 extern bool deleteMode;
+extern bool shake;
 // extern Map  map;
 extern std::vector<Particule>          particules;
 extern std::vector<GLfloat>            colors;

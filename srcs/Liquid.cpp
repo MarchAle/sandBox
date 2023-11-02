@@ -1,6 +1,6 @@
 #include "../incs/Liquid.hpp"
 
-ALiquid::ALiquid(int type, float density, bool isFalling) : AElement(LIQUID, type, density, isFalling)
+ALiquid::ALiquid(int type, float density, bool isFalling, std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr) : AElement(LIQUID, type, density, isFalling, mapAddr)
 {
 }
 
@@ -8,7 +8,7 @@ ALiquid::~ALiquid()
 {
 }
 
-void    ALiquid::moveHumidity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y)
+void    ALiquid::moveHumidity(int x, int y)
 {
     (void)map,
     (void)x;

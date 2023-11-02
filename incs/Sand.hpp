@@ -8,9 +8,11 @@ class Sand : public ASolid
     private:
 
     public:
-        Sand();
+        Sand(std::vector<std::vector<std::unique_ptr<AElement> > > *mapAddr);
         ~Sand();
-        void    moveElement(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int x, int y);
+        void    moveElement(int x, int y);
+        void    fallDown(int x, int y, int i);
+        void    fallOnSide(int x, int y, int i);
         // float*  generateColor(int minRed, int maxRed, int minGreen, int maxGreen, int minBlue, int maxBlue);
         
 };
