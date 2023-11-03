@@ -33,7 +33,7 @@ void    addParticules(std::vector<std::vector<std::unique_ptr<AElement> > > &map
         return;
     }
 
-    int loop = currentParticuleType == WATER ? 3 : 1;
+    int loop = currentParticuleType == WATER ? 30 : 30;
     while (loop > 0)
     {
         std::uniform_int_distribution<int> dist(-spread, spread);

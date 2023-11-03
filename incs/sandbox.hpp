@@ -12,6 +12,7 @@
 #include <array>
 #include <memory>
 #include <random>
+#include <thread>
 #include <unistd.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -24,7 +25,7 @@ class AElement;
 
 #define WIN_WIDTH 1000
 #define WIN_HEIGHT 800
-#define PARTICULE_SIZE 5
+#define PARTICULE_SIZE 4
 #define SPREAD_SIZE 5
 
 #define VOID -1

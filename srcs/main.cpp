@@ -76,11 +76,12 @@ void    meltSnow(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int
     }
 }
 
-void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
+void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int start, int end)
 {
+    // std::cout << "end : " << end << " " << map[0].size() << std::endl;
     for (int y = (int)map[0].size() - 1; y >= 0; y--)
     {
-        for (int x = 0; x < (int)map.size() - 1; x++)
+        for (int x = start; (x < end && x < (int)map.size()); x++)
         {
             (*map[x][y]).moveElement(x, y);
             (*map[x][y]).moveHumidity(x, y);
@@ -96,11 +97,11 @@ void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
     }
 }
 
-void    updateVelocity(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
+void    updateVelocity(std::vector<std::vector<std::unique_ptr<AElement> > > &map, int start, int end)
 {
     for (int y = (int)map[0].size() - 1; y >= 0; y--)
     {
-        for (int x = 0; x < (int)map.size() - 1; x++)
+        for (int x = start; (x < end && x < (int)map.size()); x++)
         {
             if ((*map[x][y]).get_particule_state() == SOLID)
                 (*map[x][y]).y_velocity *= GRAVITY;
@@ -123,22 +124,28 @@ void    shakeMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
     }
 }
 
-int main()
+void    initMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
 {
-    std::vector<std::vector<std::unique_ptr<AElement> > > map;
     map.resize(WIN_WIDTH / squareSize + 1);
     for (size_t i = 0; i < map.size(); i++)
     {
         for (int j = 0; j < WIN_HEIGHT / squareSize + 1; j++)
             map[i].push_back(std::make_unique<Air>(&map));
     }
+}
 
+int main()
+{
     float glParticuleWidth = (float)squareSize / WIN_WIDTH;
     float glParticuleHeight = (float)squareSize / WIN_HEIGHT;
+    std::vector<std::vector<std::unique_ptr<AElement> > > map;
+    initMap(map);
+
+    int colWidth = map.size() / 12;
+    std::vector<std::thread> threads;
 
     if (initLibraries() == 1)
         return (1);
-
     setUpOpenGl();
 
     while (!glfwWindowShouldClose(window)) {
@@ -147,14 +154,30 @@ int main()
             processClick(map);
         buildParticulesVector(map);
         render(glParticuleWidth, glParticuleHeight);
-        updateMap(map);
-        updateVelocity(map);
-        // if (shake == true)
-        // {
-        //     shake = false;
-        //     // std::cout << "Shake is disable" << std::endl;
-        //     shakeMap(map);
-        // }
+        // updateMap(map);
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j <= 12; j += 2)
+                threads.push_back(std::thread(updateMap, std::ref(map), (j + i) * colWidth, (j + i) * colWidth + colWidth));
+            for (size_t j = 0; j < threads.size(); j++)
+                threads[j].join();
+            threads.clear();
+        }
+        // updateVelocity(map);
+        for (int i = 0; i < 2; i++)
+        {
+            for (int j = 0; j <= 12; j += 2)
+                threads.push_back(std::thread(updateVelocity, std::ref(map), (j + i) * colWidth, (j + i) * colWidth + colWidth));
+            for (size_t j = 0; j < threads.size(); j++)
+                threads[j].join();
+            threads.clear();
+        }
+        if (shake == true)
+        {
+            shake = false;
+            // std::cout << "Shake is disable" << std::endl;
+            shakeMap(map);
+        }
     }
     cleanUp();
     return 0;

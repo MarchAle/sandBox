@@ -12,8 +12,8 @@
 
 NAME 		:= sandbox
 CC 			:= c++
-CFLAGS	 	:= -Wall -Wextra -Werror 
-LDFLAGS		:= -lglfw -lGL -lGLEW
+CFLAGS	 	:= -Wall -Wextra -Werror -pthread
+LDFLAGS		:= -lglfw -lGL -lGLEW 
 
 DIR_SRCS	:= ./srcs
 DIR_OBJS	:= ./objs
