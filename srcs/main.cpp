@@ -87,7 +87,7 @@ void    updateMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
             if ((*map[x][y]).get_particule_type() == SNOW)
                 meltSnow(map, x, y);
             ///// correctif pour les cas ou des particules restaient bloquées en not falling au dessus d'un vide
-            if (isValidCoordonate(map, x, y + 1) /*&& (*map[x][y]).isFalling() == false */&& (*map[x][y + 1]).get_particule_state() == LIQUID)
+            if ((*map[x][y]).isFalling() == false && isValidCoordonate(map, x, y + 1) && (*map[x][y + 1]).get_particule_state() == LIQUID)
             {
                 (*map[x][y]).setFallingAs(true);
                 (*map[x][y]).y_velocity = 1;
@@ -116,7 +116,6 @@ void    shakeMap(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
         {
             if ((*map[x][y]).get_particule_type() != STONE)
             {
-                
                 (*map[x][y]).setFallingAs(true);
                 (*map[x][y]).y_velocity = 1;
             }
@@ -150,12 +149,12 @@ int main()
         render(glParticuleWidth, glParticuleHeight);
         updateMap(map);
         updateVelocity(map);
-        if (shake == true)
-        {
-            shake = false;
-            // std::cout << "Shake is disable" << std::endl;
-            shakeMap(map);
-        }
+        // if (shake == true)
+        // {
+        //     shake = false;
+        //     // std::cout << "Shake is disable" << std::endl;
+        //     shakeMap(map);
+        // }
     }
     cleanUp();
     return 0;

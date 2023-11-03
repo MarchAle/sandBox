@@ -18,7 +18,7 @@ void    Water::moveElement(int x, int y)
         {
             std::uniform_int_distribution<int> dist(-1, 1);
             int randomValue = dist(gen);
-            if (/*rand() / static_cast<float> (RAND_MAX) <= 1 && */isValidCoordonate(*map, x - randomValue, y + i - 1) && (*map)[x - randomValue][y + i - 1]->get_particule_state() == SOLID && (*map)[x - randomValue][y + i]->get_particule_state() == LIQUID)
+            if (rand() / static_cast<float> (RAND_MAX) <= 0.8 && isValidCoordonate(*map, x - randomValue, y + i - 1) && (*map)[x - randomValue][y + i - 1]->get_particule_state() == SOLID && (*map)[x - randomValue][y + i]->get_particule_state() == LIQUID)
                 std::swap((*map)[x][y + i], (*map)[x - randomValue][y + i]);
             else if (((*map)[x][y + i + 1]->get_particule_state() == LIQUID && density > (*map)[x][y + i + 1]->get_density()) /*|| (*map)[x][y + i + 1]->get_particule_type() == SNOW*/)
             {

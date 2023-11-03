@@ -23,35 +23,42 @@ void    deleteParticule(std::vector<std::vector<std::unique_ptr<AElement> > > &m
 
 void    addParticules(std::vector<std::vector<std::unique_ptr<AElement> > > &map, double xpos, double ypos)
 {
-    for (int i = -spread / 2; i < spread / 2; i++)
+    if (currentParticuleType == STONE)
     {
-        for (int j = -spread / 2; j < spread / 2; j++)
+        for (int i = -spread / 2; i <= spread / 2; i++)
         {
-            if (isValidCoordonate(map, xpos + i, ypos + j))
+            for (int j = -spread / 2; j <= spread / 2; j++)
+                map[xpos + i][ypos + j] = std::make_unique<Stone>(&map);
+        }
+        return;
+    }
+
+    int loop = currentParticuleType == WATER ? 3 : 1;
+    while (loop > 0)
+    {
+        std::uniform_int_distribution<int> dist(-spread, spread);
+        int randomI = dist(gen);
+        int randomJ = dist(gen);
+
+        if (isValidCoordonate(map, xpos + randomI, ypos + randomJ))
+        {
+            switch (currentParticuleType)
             {
-                switch (currentParticuleType)
-                {
                 case SAND:
-                    map[xpos + i][ypos + j] = std::make_unique<Sand>(&map);
+                    map[xpos + randomI][ypos + randomJ] = std::make_unique<Sand>(&map);
                     break;
                 case SNOW:
-                    map[xpos + i][ypos + j] = std::make_unique<Snow>(&map);
-                    break;
-                case STONE:
-                    map[xpos + i][ypos + j] = std::make_unique<Stone>(&map);
-                    break;
-                case AIR:
-                    map[xpos + i][ypos + j] = std::make_unique<Air>(&map);
+                    map[xpos + randomI][ypos + randomJ] = std::make_unique<Snow>(&map);
                     break;
                 case WATER:
-                    map[xpos + i][ypos + j] = std::make_unique<Water>(&map);
+                    map[xpos + randomI][ypos + randomJ] = std::make_unique<Water>(&map);
                     break;
                 
                 default:
                     break;
-                }
             }
         }
+        loop--;
     }
 }
 
@@ -62,7 +69,6 @@ void    processClick(std::vector<std::vector<std::unique_ptr<AElement> > > &map)
     glfwGetCursorPos(window, &xpos, &ypos);
     xpos = (int)xpos / squareSize;
     ypos = (int)ypos /  squareSize;
-
 
     if (deleteMode == true)
         deleteParticule(map, xpos, ypos);

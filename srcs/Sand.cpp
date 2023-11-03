@@ -16,17 +16,10 @@ void    Sand::fallDown(int x, int y, int i)
     int randomValue = dist(gen);
 
     if (isValidCoordonate(*map, x + randomValue, y + i + 1) && (*map)[x + randomValue][y + i + 1]->get_particule_state() == LIQUID)
-    {
-        std::swap((*map)[x][y + i], (*map)[x][y + i + 1]);
-        std::swap((*map)[x][y + i], (*map)[x + randomValue][y + i + 1]);
-    }
+        std::swap((*map)[x][y + i + 1], (*map)[x + randomValue][y + i + 1]);
     else if (isValidCoordonate(*map, x - randomValue, y + i + 1) && (*map)[x - randomValue][y + i + 1]->get_particule_state() == LIQUID)
-    {
-        std::swap((*map)[x][y + i], (*map)[x][y + i + 1]);
-        std::swap((*map)[x][y + i], (*map)[x - randomValue][y + i + 1]);
-    }
-    else
-        std::swap((*map)[x][y + i], (*map)[x][y + i + 1]);
+        std::swap((*map)[x][y + i + 1], (*map)[x - randomValue][y + i + 1]);
+    std::swap((*map)[x][y + i], (*map)[x][y + i + 1]);
 }
 
 void    Sand::fallOnSide(int x, int y, int i)
@@ -54,7 +47,7 @@ void    Sand::moveElement(int x, int y)
     {
         int i = 0;
 
-        while (i < abs(y_velocity) && isValidCoordonate(*map, x, y + i + 1)) 
+        while (i < static_cast<int>(y_velocity) && isValidCoordonate(*map, x, y + i + 1)) 
         {
             if ((*map)[x][y + i + 1]->get_particule_state() == LIQUID)
             {
